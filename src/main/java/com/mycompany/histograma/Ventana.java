@@ -8,6 +8,7 @@ package com.mycompany.histograma;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,6 +16,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.apache.commons.csv.CSVFormat;
+import org.apache.commons.csv.CSVPrinter;
 
 /**
  *
@@ -132,10 +135,11 @@ public class Ventana extends javax.swing.JFrame {
         Map<String, Integer> palabras_histograma = new HashMap<>();
         
         //Leemos el texto que haya en el cajetin de texto
-        nombreArchivo = nombre_archivo.getText() + ".txt";
+        nombreArchivo = nombre_archivo.getText();
+        String nombreExtension = nombreArchivo + ".txt";
         
         //Leemos el archivo linea a linea con un BufferedReader
-        try(BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(nombreExtension))) {
             
             //Usamos el iterador para recorrer cada linea
             Iterator<String> it = br.lines().iterator();
@@ -184,7 +188,25 @@ public class Ventana extends javax.swing.JFrame {
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
         
-//        try(FileWriter fw = new FileWriter)
+        //Creo un array de strings con la cabecera del CSV
+        String[] Cabecera = {"Palabra","Repeticiones"};
+        
+        //Creo el CSVPrinter con su FileWriter
+        try(CSVPrinter printer = new CSVPrinter(new FileWriter(nombreArchivo + "_histograma.csv"), CSVFormat.DEFAULT
+            .withHeader(Cabecera))) {
+            
+            //Recorremos todo el mapa y vamos escribiendo en el CSV
+            mapa_global.forEach((Palabra, Repeticiones) -> {
+                try {
+                    printer.printRecord(Palabra, Repeticiones);
+                } catch (IOException ex) {
+                    Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            });
+            
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_guardarActionPerformed
 
