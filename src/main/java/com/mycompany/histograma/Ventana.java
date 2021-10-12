@@ -38,7 +38,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
+        nombre_archivo = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         leer = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
@@ -81,8 +81,8 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
-        jTextField1.setText("Nombre del archivo");
-        jPanel2.add(jTextField1);
+        nombre_archivo.setText("Nombre del archivo");
+        jPanel2.add(nombre_archivo);
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.CENTER);
 
@@ -148,8 +148,8 @@ public class Ventana extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton leer;
+    private javax.swing.JTextField nombre_archivo;
     private javax.swing.JTextArea texto_archivo;
     private javax.swing.JTextArea texto_histograma;
     // End of variables declaration//GEN-END:variables

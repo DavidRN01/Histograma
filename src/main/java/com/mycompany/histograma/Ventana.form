@@ -130,7 +130,7 @@
             <Property name="axis" type="int" value="1"/>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="nombre_archivo">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nombre del archivo"/>
               </Properties>
