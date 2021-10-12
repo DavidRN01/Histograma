@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ public class Ventana extends javax.swing.JFrame {
 
     //Atributos
     private String nombreArchivo;
+    private ArrayList<String> palabras_histograma;
     
     /**
      * Creates new form Ventana
@@ -52,7 +54,6 @@ public class Ventana extends javax.swing.JFrame {
         nombre_archivo = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         leer = new javax.swing.JButton();
-        generar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -108,9 +109,6 @@ public class Ventana extends javax.swing.JFrame {
         });
         jPanel6.add(leer);
 
-        generar.setText("Generar Histograma");
-        jPanel6.add(generar);
-
         guardar.setText("Guardar csv");
         jPanel6.add(guardar);
 
@@ -133,12 +131,16 @@ public class Ventana extends javax.swing.JFrame {
             Iterator<String> it = br.lines().iterator();
             while(it.hasNext()) {
                 String linea = it.next();
-                texto_archivo.append("\n"+linea);
-//                String[] palabras = s.split(" ");
-//                for(String ss : palabras) {
-//                    System.out.println(" --> " + ss);
-//                }
-
+                texto_archivo.append(linea+"\n");
+                
+                //Creo un array de Strings con todas la palabras
+                String[] palabras = linea.split("\\ |\\?|\\!|\\¡|\\¿|\\.|\\,|\\-|\\;|\\:|\\(|\\)|\\[|\\]|\\\n");
+                for(String palabra : palabras) {
+                    //Comprobamos que la palabra tenga mas de dos caracteres
+                    if(palabra.length() > 2 ) {
+                        
+                    }
+                }
             }
             
         } catch (FileNotFoundException ex) {
@@ -185,7 +187,6 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton generar;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

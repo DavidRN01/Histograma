@@ -154,11 +154,6 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="leerActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="generar">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Generar Histograma"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JButton" name="guardar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar csv"/>
