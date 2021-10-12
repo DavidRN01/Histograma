@@ -5,12 +5,23 @@
  */
 package com.mycompany.histograma;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author david
  */
 public class Ventana extends javax.swing.JFrame {
 
+    //Atributos
+    private String nombreArchivo;
+    
     /**
      * Creates new form Ventana
      */
@@ -41,6 +52,7 @@ public class Ventana extends javax.swing.JFrame {
         nombre_archivo = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         leer = new javax.swing.JButton();
+        generar = new javax.swing.JButton();
         guardar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -89,7 +101,15 @@ public class Ventana extends javax.swing.JFrame {
         jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
 
         leer.setText("Leer txt");
+        leer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leerActionPerformed(evt);
+            }
+        });
         jPanel6.add(leer);
+
+        generar.setText("Generar Histograma");
+        jPanel6.add(generar);
 
         guardar.setText("Guardar csv");
         jPanel6.add(guardar);
@@ -100,6 +120,34 @@ public class Ventana extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerActionPerformed
+        
+        //Leemos el texto que haya en el cajetin de texto
+        nombreArchivo = nombre_archivo.getText();
+        
+        //Leemos el archivo linea a linea con un BufferedReader
+        try(BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
+            
+            //Usamos el iterador para recorrer cada linea
+            Iterator<String> it = br.lines().iterator();
+            while(it.hasNext()) {
+                String linea = it.next();
+                texto_archivo.append("\n"+linea);
+//                String[] palabras = s.split(" ");
+//                for(String ss : palabras) {
+//                    System.out.println(" --> " + ss);
+//                }
+
+            }
+            
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_leerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,6 +185,7 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton generar;
     private javax.swing.JButton guardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
