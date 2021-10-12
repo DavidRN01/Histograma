@@ -27,18 +27,76 @@ public class Ventana extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        texto_archivo = new javax.swing.JTextArea();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        texto_histograma = new javax.swing.JTextArea();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        jPanel6 = new javax.swing.JPanel();
+        leer = new javax.swing.JButton();
+        guardar = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        texto_archivo.setColumns(20);
+        texto_archivo.setRows(5);
+        texto_archivo.setEnabled(false);
+        jScrollPane1.setViewportView(texto_archivo);
+
+        jPanel3.add(jScrollPane1, java.awt.BorderLayout.CENTER);
+
+        jLabel1.setText("Archivo leido");
+        jPanel3.add(jLabel1, java.awt.BorderLayout.PAGE_START);
+
+        jPanel1.add(jPanel3);
+
+        jPanel4.setLayout(new java.awt.BorderLayout());
+
+        texto_histograma.setColumns(20);
+        texto_histograma.setRows(5);
+        texto_histograma.setEnabled(false);
+        jScrollPane2.setViewportView(texto_histograma);
+
+        jPanel4.add(jScrollPane2, java.awt.BorderLayout.CENTER);
+
+        jLabel2.setText("Histograma");
+        jPanel4.add(jLabel2, java.awt.BorderLayout.PAGE_START);
+
+        jPanel1.add(jPanel4);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+
+        jPanel5.setLayout(new java.awt.BorderLayout());
+
+        jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
+
+        jTextField1.setText("Nombre del archivo");
+        jPanel2.add(jTextField1);
+
+        jPanel5.add(jPanel2, java.awt.BorderLayout.CENTER);
+
+        jPanel6.setLayout(new javax.swing.BoxLayout(jPanel6, javax.swing.BoxLayout.LINE_AXIS));
+
+        leer.setText("Leer txt");
+        jPanel6.add(leer);
+
+        guardar.setText("Guardar csv");
+        jPanel6.add(guardar);
+
+        jPanel5.add(jPanel6, java.awt.BorderLayout.EAST);
+
+        getContentPane().add(jPanel5, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -79,5 +137,20 @@ public class Ventana extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton guardar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton leer;
+    private javax.swing.JTextArea texto_archivo;
+    private javax.swing.JTextArea texto_histograma;
     // End of variables declaration//GEN-END:variables
 }
