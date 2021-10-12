@@ -10,7 +10,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -22,7 +24,7 @@ public class Ventana extends javax.swing.JFrame {
 
     //Atributos
     private String nombreArchivo;
-    private ArrayList<String> palabras_histograma;
+    private Map<String, Integer> mapa_global;
     
     /**
      * Creates new form Ventana
@@ -94,7 +96,7 @@ public class Ventana extends javax.swing.JFrame {
 
         jPanel2.setLayout(new javax.swing.BoxLayout(jPanel2, javax.swing.BoxLayout.Y_AXIS));
 
-        nombre_archivo.setText("Nombre del archivo");
+        nombre_archivo.setText("Nombre del archivo (sin la extensión)");
         jPanel2.add(nombre_archivo);
 
         jPanel5.add(jPanel2, java.awt.BorderLayout.CENTER);
@@ -110,6 +112,11 @@ public class Ventana extends javax.swing.JFrame {
         jPanel6.add(leer);
 
         guardar.setText("Guardar csv");
+        guardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarActionPerformed(evt);
+            }
+        });
         jPanel6.add(guardar);
 
         jPanel5.add(jPanel6, java.awt.BorderLayout.EAST);
@@ -121,8 +128,11 @@ public class Ventana extends javax.swing.JFrame {
 
     private void leerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leerActionPerformed
         
+        //Declaro aqui el mapa con las claves y valores
+        Map<String, Integer> palabras_histograma = new HashMap<>();
+        
         //Leemos el texto que haya en el cajetin de texto
-        nombreArchivo = nombre_archivo.getText();
+        nombreArchivo = nombre_archivo.getText() + ".txt";
         
         //Leemos el archivo linea a linea con un BufferedReader
         try(BufferedReader br = new BufferedReader(new FileReader(nombreArchivo))) {
@@ -130,18 +140,38 @@ public class Ventana extends javax.swing.JFrame {
             //Usamos el iterador para recorrer cada linea
             Iterator<String> it = br.lines().iterator();
             while(it.hasNext()) {
+                //Creo un string para cada linea
                 String linea = it.next();
+                //Muestro en el text area cada linea
                 texto_archivo.append(linea+"\n");
                 
                 //Creo un array de Strings con todas la palabras
                 String[] palabras = linea.split("\\ |\\?|\\!|\\¡|\\¿|\\.|\\,|\\-|\\;|\\:|\\(|\\)|\\[|\\]|\\\n");
                 for(String palabra : palabras) {
                     //Comprobamos que la palabra tenga mas de dos caracteres
-                    if(palabra.length() > 2 ) {
-                        
+                    if(palabra.length() > 2) {
+                        //Paso la palabra a minusculas para que no distinga entre mayusculas y minusculas
+                        String palabra_min = palabra.toLowerCase();
+                        //Comprobamos si la palabra ya esta en el histograma
+                        if(palabras_histograma.containsKey(palabra_min)) {
+                            //Si ya esta le sumamos uno al valor
+                            palabras_histograma.put(palabra_min, (palabras_histograma.get(palabra_min)+1));
+                        } else {
+                            //Si no esta le creamos una clave y le pones valor 1
+                            palabras_histograma.put(palabra_min, 1);
+                        }
                     }
                 }
             }
+            
+            //Al mapa global le asigno el mapa que he creado aqui
+            mapa_global = palabras_histograma;
+            //NOTA: he hecho dos mapas porque si declaraba el mapa en los atributos
+            //luego no me dejaba usar el put para añadir datos al mapa, he creado
+            //otro mapa global para poder usarlo luego en el otro boton
+            
+            //Muestro en el text area del histograma el resultado
+            palabras_histograma.forEach((clave, valor) -> texto_histograma.append(clave + ": " + valor + "\n"));
             
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
@@ -149,7 +179,14 @@ public class Ventana extends javax.swing.JFrame {
             Logger.getLogger(Ventana.class.getName()).log(Level.SEVERE, null, ex);
         }
         
+        
     }//GEN-LAST:event_leerActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        
+//        try(FileWriter fw = new FileWriter)
+        
+    }//GEN-LAST:event_guardarActionPerformed
 
     /**
      * @param args the command line arguments
